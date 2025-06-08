@@ -13,6 +13,9 @@ The calculation takes into account three major factors influencing the sample si
 - the number of subjects
 
 # Example of the calculation
+
+The script takes the dataframe (excel sheet) and computed the sample size, the power, the pooledCV for the desired study
+What is the design of the desired study?
 1. Create an excel sheet with the input data of a single or multiple bioequivalence pivotal trials
 ![image](https://github.com/user-attachments/assets/cf173960-8964-4804-9c37-994644284ab5)
 
