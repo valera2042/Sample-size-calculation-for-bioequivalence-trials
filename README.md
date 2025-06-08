@@ -14,7 +14,8 @@ The calculation takes into account three major factors influencing the sample si
 
 # Example of the calculation
 1. Create an excel sheet with the input data of a single or multiple bioequivalence pivotal trials
-![image](https://github.com/user-attachments/assets/d1d9b10a-1fa7-449f-b6fb-6f62a56bf0a6)
+![image](https://github.com/user-attachments/assets/cf173960-8964-4804-9c37-994644284ab5)
+
 
 
 
