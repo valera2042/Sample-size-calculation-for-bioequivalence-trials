@@ -1,0 +1,1 @@
+# Sample-size-calculation-for-bioequivalence-trials
