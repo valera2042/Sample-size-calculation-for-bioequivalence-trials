@@ -2,7 +2,7 @@
 This script aims to compute the sample size for the bioequivalence trials from  multiple previous pivotal bioequivalence trials.
 
 # Description
-Once selecting the sample size for the conduction of the clinical bioequivalence trial it is mandatory to conduct the Public Assessment Reports (PAR) review. The sample size calculation is typically based on pharmakokinetic parameters such as Cmax, AUC, etc. There is a natural variation from study to study of the CV, the number of subjects etc. Typically there are multiple previous studies, and the problem is 
+Once selecting the sample size for the conduction of the clinical bioequivalence trial it is mandatory to conduct the Public Assessment Reports (PAR) review. The sample size calculation is typically based on pharmakokinetic parameters such as Cmax, AUC, etc. There is a natural variation from study to study of the CV, the number of subjects etc. The general approach is based on the calculation of the sample size using the data (intra subject variability (ISCV) and the study design) of only one study found either in the literature (Public Assessment Report / scientific research article) or having experimental data from the previous pilot study. This script allows to employ MULTIPLE bioequivalence studies having different designs and various ISCV.
 
 ### What study to choose for the calculation of the sample size?  
 Using this script you can include as many trials as you want, there is no limit. 
@@ -20,8 +20,8 @@ What is the design of the desired study?
 ![image](https://github.com/user-attachments/assets/cf173960-8964-4804-9c37-994644284ab5)
 
 
-
-
+# What was learned from this project?
+xxxx
 
 
 
