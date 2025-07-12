@@ -32,6 +32,12 @@ Here is the diagram of how the calculation is going on:
 clone the repository and download it, to load the file pls specify the excel sheet file path to load the dataset
 
 
+# Known issues
+stuf that did not work well in theis project
+
+# Found a bag?
+If you found a bag or have an idea of how to improve this project, please contact me on [here](https://www.linkedin.com/in/vlia/) 
+
 # What was learned from this project?
 xxxx
 
