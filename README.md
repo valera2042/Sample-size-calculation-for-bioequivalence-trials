@@ -19,7 +19,11 @@ Here is the diagram of how the calculation is going on:
 
 1. Create an excel sheet with the input data of a single or multiple bioequivalence pivotal trials.
 ![image](https://github.com/user-attachments/assets/cf173960-8964-4804-9c37-994644284ab5)
-2. Run the script. 
+
+
+<img width="1280" height="720" alt="trial picture" src="https://github.com/user-attachments/assets/867445e2-1a46-4a9c-91e0-2d2c03be5a00" />
+
+3. Run the script. 
 
 # What was learned from this project?
 xxxx
