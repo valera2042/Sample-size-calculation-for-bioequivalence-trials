@@ -25,6 +25,13 @@ Here is the diagram of how the calculation is going on:
 
 3. Run the script. 
 
+
+
+# Installation instructions
+
+clone the repository and download it, to load the file pls specify the excel sheet file path to load the dataset
+
+
 # What was learned from this project?
 xxxx
 
