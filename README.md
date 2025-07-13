@@ -37,7 +37,7 @@ Sample size can be calculated by the central and the non central t approximation
 The calculation based on the large sample approximation should be avoided because this underpowers the study.
 
 # Ackowledgments
-Some parts of the sample size calculation functions are adapted from the Helmut Schutza article regarding the comparison of the sample size calculation using
+Some parts of the sample size calculation functions are adapted from the Helmut Schutz article regarding the comparison of the sample size calculation using
 different approaches: large sample approximation, central t approzimation and noncentral t approximation
 Please check this article [here] (https://bebac.at/articles/Sample-Size-Estimation-for-Equivalence-Studies-in-a-Parallel-Design.phtml)
 
