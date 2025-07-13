@@ -1,13 +1,19 @@
 # Automation of sample size calculation for bioequivalence trial 
 # from multiple pivotal studies 
 
-#install and load readxl package
-# install.packages('readxl')
-library(readxl)
 
+
+# install packages if required
+requiredPackages <- c("readxl")
+for (package in requiredPackages) { #Installs packages if not yet installed
+  if (!requireNamespace(package, quietly = TRUE))
+    install.packages(package)
+}
+
+# get the data
 data <- read_excel("C:\\Users\\valer\\Desktop\\R_project\\pooledss.xlsx")
 
-# Data reprocessing
+# data reprocessing
 df_length <- nrow(data)         # length of dataframe 
 design <- data$Design           # seq of designs from the dataframe
 n_subjects <- data$N_subjects   # number of subjects
@@ -32,6 +38,7 @@ dfs_calc <- function(df_length, design, n_subjects, dfs_vector, k = 1, dfs_total
   # k is the pointer to iterate over all studies to computer the degrees 
   # of freedom that depend on different design and number of subjects
   # iteration if performed until the end of the dataframe (df_length)
+  
   while (k <= df_length) {
     
     if (design[k] == "2x2x2") {
@@ -80,7 +87,7 @@ CV_pooled_calc <- function(CVs, n_subjects) {
   # computation of numerator of the pooled CV
   i <- 1
   while (i <= df_length) {
-    numerator[i] <- n_subjects[i] * CVs[i]
+    numerator[i] <- (n_subjects[i] - 1) * CVs[i]
     i <- i + 1
   }
   
@@ -95,11 +102,15 @@ CV_pooled_calc <- function(CVs, n_subjects) {
 CVpooled <- CV_pooled_calc(CVs, n_subjects)
 
 # this function makes equal group sizes
-make_even <- function(n) {
+make_even_groups <- function(n) {
   return(as.integer(2 * (n %/% 2 + as.logical(n %% 2))))
 }
 
-  
+# the code below is adapted and extended from the amazing article written by 
+# Helmut Schutz for further information please refer to it in Acknowledgment 
+# section
+
+# sample_size_bioequivalence <- function()
 CV         <- CVpooled/100    # total (pooled) CV from multiple studies
 theta0     <- 0.95            # T/R-ratio (typically within the range 0.9 - 1.0)
 theta1     <- 0.80            # lower BE-limit
@@ -112,7 +123,7 @@ df         <- data.frame(method = character(), # data frame to store values
                          degrees_of_freedom = integer(),
                          CVpooled = integer(),
                          sample_size = integer(),
-                         power = numeric())
+                         expected_power = numeric())
 s2         <- log(CV^2 + 1)   # conversion of CV to variance
 s          <- sqrt(s2)        # standard deviation
 z_alpha    <- qnorm(1 - alpha)
@@ -123,9 +134,9 @@ z_beta_2   <- qnorm(1 - beta / 2)
 # check by central t approximation, since the variance is unknown
 t_alpha <- qt(1 - alpha, dfs_total[[1]]) # different degrees of freedom
 
-
+# central t approximation
 if (theta0 == 1) {
-  num   <- 2 * s2 * (Z_beta_2 + t_alpha)^2
+  num   <- 2 * s2 * (z_beta_2 + t_alpha)^2
   number_groups <- ceiling(num / log(theta2)^2)
 } else {
   num <- 2 * s2 * (z_beta + t_alpha)^2
@@ -137,17 +148,12 @@ if (theta0 == 1) {
   number_groups <- ceiling(num / denom)
 }
 
-
-n <- make_even(2 * number_groups)
-
+n <- make_even_groups(2 * number_groups)
 t_alpha <- qt(1 - alpha, dfs_total[[1]])
-t_alpha
 power <- pnorm(sqrt((log(theta0) - log(theta2))^2 * number_groups/
                       (2 * s2)) - t_alpha) +
   pnorm(sqrt((log(theta0) - log(theta1))^2 * number_groups/
                (2 * s2)) - t_alpha) - 1
-
-
 
 
 # applying non central t approximation for the calculation of the sample size
@@ -160,8 +166,8 @@ if (power < target) {# iterate upwards
     power <- diff(pt(c(+1, -1) * qt(1 - alpha,
                                     df = dfs_total),
                      df = dfs_total, ncp = ncp))
-    df[i, 1:6] <- c("noncentral t", i, dfs_total, sprintf("%.2f", CVpooled),
-                        n, sprintf("%.2f", power))
+    df[i, 1:6] <- c("noncentral t", i, dfs_total, sprintf("%.4f", CVpooled),
+                        n, sprintf("%.4f", power))
     if (power >= target) {
       break
     }else {
@@ -172,9 +178,6 @@ if (power < target) {# iterate upwards
 } else {             # iterate downwards
   repeat {
     sem   <- sqrt(4 / n) * s # standard error of the mean
-    
-    
-    
     ncp   <- c((log(theta0) - log(theta1)) / sem, # non centrality parameter
                # degree to which mean of the test departs from the mean when
                # null hypostesis is true
@@ -182,8 +185,8 @@ if (power < target) {# iterate upwards
     power <- diff(pt(c(+1, -1) * qt(1 - alpha,
                                     df = dfs_total),
                      df = dfs_total, ncp = ncp))
-    df[i, 1:6] <- c("noncentral t", i,dfs_total, sprintf("%.2f", CVpooled),
-                        n, sprintf("%.2f", power))
+    df[i, 1:6] <- c("noncentral t", i,dfs_total, sprintf("%.4f", CVpooled),
+                        n, sprintf("%.4f", power))
     if (power < target) {
       df <- df[-nrow(df), ]
       break
@@ -193,6 +196,18 @@ if (power < target) {# iterate upwards
     }
   }
 }
-print(df, row.names = FALSE)
 
+print(df[nrow(df), ], row.names = FALSE)
 
+parallel <- as.integer(df$sample_size[-1])
+parallel
+crossover2x2x2 <- ceiling(parallel / 2)
+crossover2x2x3 <- ceiling(parallel / 3)
+crossover2x2x4 <- ceiling(parallel / 4)
+
+sample_size <- c(parallel, crossover2x2x2, crossover2x2x3, crossover2x2x4)
+designs <- c('parallel', '2x2x2', '2x2x3', '2x2x4')
+
+df_samplesize         <- data.frame(designs, # data frame to store values
+                                    sample_size)
+df_samplesize
