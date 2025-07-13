@@ -15,21 +15,22 @@ The calculation takes into account three major factors influencing the sample si
 # Example of the calculation
 
 The script takes the dataframe (excel sheet) and computes the sample size, power and pooledCV for the desired study
+based on Cmax parameter (usually Cmax has the highest variability than AUCt).
 Here is the diagram of how the calculation is going on:
 
 1. Create an excel sheet with the input data of a single or multiple bioequivalence pivotal trials.
-![image](https://github.com/user-attachments/assets/cf173960-8964-4804-9c37-994644284ab5)
 
+<img width="1280" height="720" alt="Presentation2" src="https://github.com/user-attachments/assets/19080d9a-3778-4246-b7bd-0c978535a61e" />
 
-<img width="1280" height="720" alt="trial picture" src="https://github.com/user-attachments/assets/867445e2-1a46-4a9c-91e0-2d2c03be5a00" />
-
-3. Run the script. 
+2. Run the script.
+   
+<img width="1280" height="720" alt="Presentation1" src="https://github.com/user-attachments/assets/9cf86d18-e531-4210-917c-10ababe68626" />
 
 
 
 # Installation instructions
 
-clone the repository and download it, to load the file pls specify the excel sheet file path to load the dataset
+Download repository to load the file pls specify the excel sheet file path to load the dataset
 
 
 # Known issues
