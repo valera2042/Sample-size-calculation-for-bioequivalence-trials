@@ -11,7 +11,7 @@ for (package in requiredPackages) { #Installs packages if not yet installed
 }
 
 # get the data
-data <- read_excel("C:\\Users\\valer\\Desktop\\R_project\\pooledss.xlsx")
+data <- read_excel("...path to excel file")
 
 # data reprocessing
 df_length <- nrow(data)         # length of dataframe 
