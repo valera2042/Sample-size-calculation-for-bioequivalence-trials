@@ -5,7 +5,7 @@ This script aims to compute the sample size for the bioequivalence trials from  
 Once selecting the sample size for the conduction of the clinical bioequivalence trial it is mandatory to conduct the Public Assessment Reports (PAR) review. The sample size calculation is typically based on pharmakokinetic parameters such as Cmax, AUC, etc. There is a natural variation from study to study of the CV, the number of subjects etc. The general approach is based on the calculation of the sample size using the data (intra subject variability (ISCV) and the study design) of only one study found either in the literature (Public Assessment Report / scientific research article) or having experimental data from the previous pilot study. This script allows to employ MULTIPLE bioequivalence studies having different designs and various ISCV.
 
 ### What study to choose for the calculation of the sample size?  
-Using this script you can include as many trials as you want, there is no limit. 
+Using this script you can include in the calculation as many trials as you want, there is no limit. 
 
 The calculation takes into account three major factors influencing the sample size:
 - the design
@@ -13,7 +13,6 @@ The calculation takes into account three major factors influencing the sample si
 - the number of subjects
 
 # Example of the calculation
-
 The script takes the dataframe (excel sheet) and computes the sample size, power and pooledCV for the desired study
 based on Cmax parameter (usually Cmax has the highest variability than AUCt).
 Here is the diagram of how the calculation is going on:
@@ -26,23 +25,16 @@ Here is the diagram of how the calculation is going on:
    
 <img width="1280" height="720" alt="Presentation1" src="https://github.com/user-attachments/assets/9cf86d18-e531-4210-917c-10ababe68626" />
 
-
-
 # Installation instructions
-
-Download repository to load the file pls specify the excel sheet file path to load the dataset
-
-
-# Known issues
-stuf that did not work well in theis project
+Please go to file named sample size pooled.R and click in the upper right corner the icon copy to copy the code, insert it, for example, into R studio,
+specify the path for your excel file and run it.
 
 # Found a bag?
 If you found a bag or have an idea of how to improve this project, please contact me on [here](https://www.linkedin.com/in/vlia/) 
 
 # What was learned from this project?
-xxxx
-
-
+Sample size can be calculated by the central and the non central t approximation. 
+The calculation based on the large sample approximation should be avoided because this underpowers the study.
 
 # Ackowledgments
 Some parts of the sample size calculation functions are adapted from the Helmut Schutza article regarding the comparison of the sample size calculation using
